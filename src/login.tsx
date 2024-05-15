@@ -1,5 +1,6 @@
 import React, {FormEvent, useState} from "react";
 import './login.css';
+import {BACKEND_LINK} from "./backend";
 
 interface LoginProps {
   setAccount: (account: [string, string]) => void;
@@ -10,10 +11,18 @@ export const Login: React.FC<LoginProps> = ({setAccount}) => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
-  const tryLogin = (e: FormEvent) => {
+  const tryLogin = async (e: FormEvent) => {
     e.preventDefault()
-    if(username !== "")
+    if(username !== "") {
+      await fetch(BACKEND_LINK + "/register", {
+        method: "POST",
+        body: JSON.stringify({
+          "login": username,
+          "password": password,
+        })
+      })
       setAccount([username, password])
+    }
   }
 
   return <div>

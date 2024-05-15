@@ -1,6 +1,7 @@
 import React, {FormEvent, useEffect, useRef, useState} from "react";
 import './chat.css';
 import {randomInt} from "node:crypto";
+import {BACKEND_LINK} from "./backend";
 
 interface ChatProps {
   account: [string, string]
@@ -29,7 +30,7 @@ export const Chat: React.FC<ChatProps> = ({account}) => {
       setSendingDisabled(true)
       let newMessage = {text: inputText, isUser: true, isError: false}
       addMessage(newMessage)
-      fetch("https://localhost:8000", {
+      fetch(BACKEND_LINK + "/message", {
         method: "POST",
         body: JSON.stringify({
           "login": account[0],

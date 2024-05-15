@@ -1,0 +1,110 @@
+:root {
+    --message-radius: 10px;
+    --message-margin: 2px;
+    --message-color-user: lightblue;
+    --message-text-color-user: black;
+    --message-color-assistant: blue;
+    --message-text-color-assistant: black;
+    --message-color-error: darkred;
+    --message-text-color-error: white;
+}
+
+.messages-container {
+    width: 400px;
+    height: 600px;
+    background: darkgray;
+    overflow-y: scroll;
+    align-content: end;
+    border-radius: 10px;
+}
+
+.messages-container::-webkit-scrollbar{
+    display: none;
+}
+
+.message-container-user, .message-container-assistant {
+    position: relative;
+}
+
+.message-container-user {
+    text-align: right;
+    --message-color: var(--message-color-user);
+    --message-text-color: var(--message-text-color-user);
+}
+
+.message-container-assistant {
+    text-align: left;
+    --message-color: var(--message-color-assistant);
+    --message-text-color: var(--message-text-color-assistant)
+}
+
+.message-container-user.error  {
+    --message-color: var(--message-color-error);
+    --message-text-color: var(--message-text-color-error);
+}
+
+.message {
+    display: inline-block;
+    padding: 15px;
+    margin: 10px calc(var(--message-margin) + var(--message-radius)) 10px calc(var(--message-margin) + var(--message-radius));
+    border-radius: var(--message-radius);
+    max-width: 250px;
+    font-size: 16px;
+}
+
+.message-container-user > .message {
+    background: var(--message-color);
+    color: var(--message-text-color);
+}
+
+.message-container-assistant > .message {
+    background: var(--message-color);
+    color: var(--message-text-color);
+}
+
+.message-container-user > .message {
+    border-bottom-right-radius: 0;
+}
+
+.message-container-assistant > .message {
+    border-bottom-left-radius: 0;
+}
+
+.message-container-user::after {
+    content: '';
+    background: radial-gradient(circle at var(--message-radius) 0, transparent var(--message-radius), var(--message-color) var(--message-radius));
+    width: var(--message-radius);
+    height: var(--message-radius);
+    display: block;
+    position: absolute;
+    right: var(--message-margin);
+    bottom: 10px;
+}
+
+.message-container-assistant::after {
+    content: '';
+    background: radial-gradient(
+            circle at 0 0,
+            transparent var(--message-radius),
+            var(--message-color) calc(var(--message-radius) + 1px));
+    width: var(--message-radius);
+    height: var(--message-radius);
+    display: block;
+    position: absolute;
+    left: var(--message-margin);
+    bottom: 10px;
+}
+
+.chat-container {
+    padding: 10px;
+    border-radius: 10px;
+    background: gray;
+}
+
+.form-send > input {
+    margin: 5px
+}
+
+.form-send {
+    margin-top: 10px
+}
